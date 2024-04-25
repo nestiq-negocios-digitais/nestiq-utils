@@ -30,8 +30,10 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.1.0 (24-04-2024)**
+
+- Add axiosRetry
+
 **v1.0.0 (24-04-2024)**
 
 - Versão inicial com o logger
-
----
