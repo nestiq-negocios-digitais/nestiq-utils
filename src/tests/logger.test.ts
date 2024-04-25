@@ -1,10 +1,12 @@
 import logger from "../modules/logger"
 describe("Teste do logger", () => {
-  test("Deveria imprimir se tipo é 'error'", () => {
+  test("Deveria forçar imprimir se tipo é 'error'", () => {
+    process.env.LOGGER_ATIVADO = "false"
     expect(logger("ha", "error")).toBe(true)
   })
 
-  test("Deveria imprimir se tipo é 'warning'", () => {
+  test("Deveria forçar imprimir se tipo é 'warning'", () => {
+    process.env.LOGGER_ATIVADO = "false"
     expect(logger("ha", "warning")).toBe(true)
   })
 
