@@ -1,6 +1,6 @@
 {
   "name": "nestiq-utils",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,10 +18,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node-fetch": "^2.6.11",
     "@types/supertest": "^6.0.2",
     "axios": "^1.6.8",
     "axios-retry": "^4.1.0",
-    "dotenv": "^16.4.4"
+    "dotenv": "^16.4.4",
+    "https-proxy-agent": "^7.0.4",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

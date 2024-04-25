@@ -3,14 +3,14 @@ import axiosRetry, { isRetryableError } from "axios-retry"
 
 /**
  * Cria uma instância do axios com retentativa automática
- * @param maxTentativas Número máximo de retentativas
- * @param delay Tempo em ms de espera entre requisições
+ * @param maxTentativas (Padrão = 3). Número máximo de retentativas
+ * @param delay (Padrão = 7000). Tempo em ms de espera entre requisições
  * @param retryFunction Função a ser executada antes de cada retentativa
  * @returns Uma instância do axios com o retry aplicado
  */
 const createAxiosRetry = (
-  maxTentativas: number,
-  delay: number,
+  maxTentativas: number = 3,
+  delay: number = 7000,
   retryFunction: (retryCount: number) => void = () => {},
 ) => {
   axiosRetry(axios, {
