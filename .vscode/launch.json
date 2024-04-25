@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+        "name": "Debug Código TS",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/src/index.ts",
+        "runtimeArgs": [
+            "-r",
+            "ts-node/register"
+        ],
+        "sourceMaps": true,
+        "protocol": "inspector"
+    }]
+}
