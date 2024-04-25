@@ -1,5 +1,5 @@
 {
-  "name": "package-template",
+  "name": "nestiq-utils",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -16,7 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/supertest": "^6.0.2"
+    "@types/supertest": "^6.0.2",
+    "dotenv": "^16.4.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

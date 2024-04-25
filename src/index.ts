@@ -1,6 +1,1 @@
-const meuPackage = () => {
-  return "Package funcionando!"
-}
-
-export default meuPackage
-console.log(meuPackage())
+export { default as logger } from "./modules/logger"

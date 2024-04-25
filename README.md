@@ -1,10 +1,12 @@
-# Package Template
+# Bibliotecas de utilidade básicas - NèstiQ
 
 <br>
 
 ## Sobre esse script
 
------ **Inclua aqui os detalhes pertinentes a esse script** -----
+Lista de bibliotecas:
+
+1. logger: Camada intermediária para `console.log`.
 
 <br>
 
@@ -14,23 +16,22 @@ Para a construção desse modelo foi utilizado o typescript v4.9.5
 
 <br>
 
-
 ## Testes automatizados
 
-Todos os testes automatizados para funções, métodos e endpoints estão na pasta `tests`. Utilize o comando `npm test` para executá-los.
+Todos os testes automatizados estão na pasta `tests`. Utilize o comando `npm test` para executá-los.
 
 <br>  
   
 ## Sobre o Desenvolvimento e Debug
 
-Para testes locais e desenvolvimento, use o comando `npm run dev`. O servidor irá responder em `http://localhost:8080`
+Para testes locais e desenvolvimento, use o comando `npm run dev`.
 
 <br>
   
 ## Changelog
 
-**v1.0.0 (00-00-2024)**
+**v1.0.0 (24-04-2024)**
 
-- Versão inicial
+- Versão inicial com o logger
 
 ---
