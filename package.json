@@ -11,7 +11,8 @@
     "dev": "cross-env NODE_ENV=development nodemon ./dist/index.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "prod": "cross-env NODE_ENV=production node ./dist/index.js",
-    "lint": "npx eslint --ext .js,.ts --fix src/**"
+    "lint": "npx eslint --ext .js,.ts --fix src/**",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "",
