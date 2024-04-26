@@ -1,6 +1,5 @@
 import fetch from "node-fetch"
 import { HttpsProxyAgent } from "https-proxy-agent"
-
 interface ProxyConfig {
   ativo?: boolean
   user?: string
@@ -62,21 +61,3 @@ const fetchWithTimeout = async (
 }
 
 export default fetchWithTimeout
-
-/**
- * Realiza uma requisição utilizando o node-fetch com opções de timeout e retentativas.
- *
- * @param {string} url - URL da requisição.
- * @param {Object} config - Objeto contendo as configurações da requisição (ex: headers, method, body).
- * @param {number} Tempo limite em milissegundos para a requisição.
- * @param {number} Número de tentativas em caso de falha.
- * @param {number} Intervalo em milissegundos entre as retentativas.
- *
- * @returns {Promise} - Promise contendo o resultado da requisição.
- *
- * @throws {Error} - Lança um erro se o tempo limite for excedido ou se todas as retentativas falharem.
- *
- * @example
- * const response = await fetchWithTimeout('https://api.example.com/data', { method: 'GET' }, 3000, 3, 2000) as fetch.Response;
- * const response = await fetchWithTimeout("https://ifconfig.me", { method: "GET" }) as fetch.Response;
- */
