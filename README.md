@@ -30,6 +30,10 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.3.0 (26-04-2024)**
+
+- Add servicoCheckpoint
+
 **v1.1.0 (24-04-2024)**
 
 - Add axiosRetry
