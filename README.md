@@ -30,6 +30,11 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.4.0 (14-08-2024)**
+
+- Add enviaGoogleLogging p/ enviar os logs p/ api do gooogle logging 
+- Ajuste no logger p/ utilizar o novo método enviaGoogleLogging
+
 **v1.3.0 (26-04-2024)**
 
 - Add servicoCheckpoint
