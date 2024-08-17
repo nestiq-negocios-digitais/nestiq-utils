@@ -1,9 +1,12 @@
+import sleep from "./sleep"
+
 /**
  * Cria um temporizados sync
  * @param {number} time Tempo em milissegundos
+ * @deprecated utilize a biblioteca 'sleep'
  */
-const temporizadorSync = (time: number) => {
-  return new Promise((resolve) => setTimeout(resolve, time))
+const temporizadorSync = async (time: number) => {
+  return await sleep(time)
 }
 
 export default temporizadorSync
