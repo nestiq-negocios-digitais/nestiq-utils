@@ -10,9 +10,13 @@ type tipo = "info" | "warning" | "error"
  * @param forcarEnvioGoogle Se deve enviar o log mesmo se for do tipo 'info'
  * @returns true se algo foi impresso no console
  */
-const logger = async (msg: string, tipo: tipo = "info", forcarEnvioGoogle = false): Promise<boolean> => {
-
-  const verbose = process.env.VERBOSE == "true" || process.env.LOGGER_ATIVADO == "true" // Mantém a compatibilidade com a versão antiga do módulo
+const logger = async (
+  msg: string,
+  tipo: tipo = "info",
+  forcarEnvioGoogle = false,
+): Promise<boolean> => {
+  const verbose =
+    process.env.VERBOSE == "true" || process.env.LOGGER_ATIVADO == "true" // LOGGER_ATIVADO - Mantém a compatibilidade com a versão antiga do módulo
 
   if (verbose || tipo != "info") {
     switch (tipo) {
@@ -29,7 +33,11 @@ const logger = async (msg: string, tipo: tipo = "info", forcarEnvioGoogle = fals
   }
 
   if ((tipo != "info" || forcarEnvioGoogle) && process.env.NODE_ENV == "prod")
-    return await enviaGoogleLogging(msg, tipo, process.env.APLICACAO_ID ?? "DEFAULT")
+    return await enviaGoogleLogging(
+      msg,
+      tipo,
+      process.env.APLICACAO_ID ?? "DEFAULT",
+    )
 
   return true
 }
