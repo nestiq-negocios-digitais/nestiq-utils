@@ -41,6 +41,10 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.4.3 (19-08-2024)**
+
+- Alterado o nome do atributo enviado no JSON
+
 **v1.4.2 (17-08-2024)**
 
 - Melhorada a documentação
