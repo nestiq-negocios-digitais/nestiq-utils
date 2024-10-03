@@ -1,7 +1,8 @@
 import sleep from "./sleep"
 
 /**
- * Cria um temporizados sync
+ * Preterido. Use o módulo sleep.
+ * Cria um temporizados sync.
  * @param {number} time Tempo em milissegundos
  * @deprecated utilize a biblioteca 'sleep'
  */

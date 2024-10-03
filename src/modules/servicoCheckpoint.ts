@@ -1,13 +1,45 @@
-import axios from "axios"
+import createAxiosRetry from "./createAxiosRetry"
 
 /**
- * Realiza um chekpoint no banco de dados para que no dashboard administrativo possa ser visto que o serviço em questão está funcionando corretamente
- * @param url A URL da API que registra os checkpoints no banco de dados
- * @param servicoId O ID do serviço
+ * Atualiza a data do último checkpoint de um serviço no banco de dados para que no dashboard administrativo possa ser visto que o serviço em questão está funcionando corretamente
+ * Obs: Precisa das variáveis de ambiente STRAPI_URL_BASE, STRAPI_BEARER_TOKEN
+ * @param servicoDocumentId Opcional. Padrão = process.env.SERVICO_DOCUMENT_ID. O documentId do serviço registrado no DB pelo Strapi
  */
-const servicoCheckpoint = async (url: string, servicoId: string) => {
+const servicoCheckpoint = async (
+  servicoDocumentId: string | undefined = process.env.SERVICO_DOCUMENT_ID,
+) => {
+  if (!servicoDocumentId)
+    throw new Error(
+      "O 'servicoDocumentId' não está definido como variável de ambiente (process.env.SERVICO_DOCUMENT_ID) e não foi fornecido na chamada da função.",
+    )
+
+  if (!process.env.STRAPI_URL_BASE)
+    throw new Error(
+      "A variável de ambiente 'STRAPI_URL_BASE' não foi definida.",
+    )
+
+  if (!process.env.STRAPI_BEARER_TOKEN)
+    throw new Error(
+      "A variável de ambiente 'STRAPI_BEARER_TOKEN' não foi definida.",
+    )
+
+  const axios = createAxiosRetry()
+  const url = `${process.env.STRAPI_URL_BASE}/api/servicos/${servicoDocumentId}`
+  const token = process.env.STRAPI_BEARER_TOKEN
+  const payload = {
+    data: {
+      ultimo_checkpoint: new Date().toISOString(),
+    },
+  }
+
   try {
-    await axios.get(url, { headers: { "aplicacao-id": servicoId } })
+    const res = await axios.put(url, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+    return res.data
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     let e

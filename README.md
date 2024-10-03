@@ -41,6 +41,12 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.5.0 (03-10-2024)**
+
+- Melhorada a descrição dos módulos
+- Adicionado a verificação da presença de variáveis de ambiente antes de executar o módulo
+- Alterado o módulo servicoCheckpoint para funcionar com o Strapi
+
 **v1.4.3 (19-08-2024)**
 
 - Alterado o nome do atributo enviado no JSON

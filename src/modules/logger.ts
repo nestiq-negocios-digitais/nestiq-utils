@@ -1,20 +1,32 @@
 import "dotenv/config"
 import enviaGoogleLogging from "./enviaGoogleLogging"
+import logTipo from "../models/logTipo"
 
-type tipo = "info" | "warning" | "error"
 /**
- * Imprime uma mensagem no console se a variável de ambiente 'LOGGER_ATIVADO' for igual a 'true'
- * Se o tipo for diferente de "info", força a impressão mesmo com a variável de ambiente 'LOGGER_ATIVADO' estando 'false',
+ * Imprime uma mensagem no console e envia logs parao GCP.
+ * Se a variável de ambiente 'VERBOSE' for igual a 'true', imprime sempre no console.
+ * Se o tipo for diferente de "info" envia para o Google Logging e força a impressão mesmo com a variável de ambiente 'VERBOSE' estando 'false'.
+ * Obs: Necessita das variáveis de ambiente NODE_ENV, VERBOSE e SERVICO_DOCUMENT_ID definidas para funcionar.
  * @param msg A mensagem a ser impressa no console
  * @param tipo O Tipo do log
- * @param forcarEnvioGoogle Se deve enviar o log mesmo se for do tipo 'info'
- * @returns true se algo foi impresso no console
+ * @param forcarEnvioGoogle Se deve enviar o log mesmo se for do tipo 'info'. Outros tipos são enviados automaticamente
  */
 const logger = async (
   msg: string,
-  tipo: tipo = "info",
+  tipo: logTipo = "info",
   forcarEnvioGoogle = false,
-): Promise<boolean> => {
+): Promise<void> => {
+  if (!process.env.VERBOSE)
+    throw new Error("A variável de ambiente 'VERBOSE' não foi definida.")
+
+  if (!process.env.NODE_ENV)
+    throw new Error("A variável de ambiente 'NODE_ENV' não foi definida.")
+
+  if (!process.env.SERVICO_DOCUMENT_ID)
+    throw new Error(
+      "A variável de ambiente 'SERVICO_DOCUMENT_ID' não foi definida.",
+    )
+
   const verbose =
     process.env.VERBOSE == "true" || process.env.LOGGER_ATIVADO == "true" // LOGGER_ATIVADO - Mantém a compatibilidade com a versão antiga do módulo
 
@@ -31,15 +43,21 @@ const logger = async (
         break
     }
   }
+  const isProductionEnv =
+    process.env.NODE_ENV == "prod" || process.env.NODE_ENV == "production"
 
-  if ((tipo != "info" || forcarEnvioGoogle) && process.env.NODE_ENV == "prod")
-    return await enviaGoogleLogging(
-      msg,
-      tipo,
-      process.env.APLICACAO_ID ?? "DEFAULT",
+  if ((tipo != "info" || forcarEnvioGoogle) && isProductionEnv) {
+    try {
+      await enviaGoogleLogging(msg, tipo, process.env.SERVICO_DOCUMENT_ID)
+    } catch (error) {
+      const msg = `Não foi possível enviar o log para o GCP Logging: ${error}`
+      console.error(msg)
+    }
+  } else if (tipo != "info") {
+    logger(
+      "O log de erro ou warning não será enviado ao Google porque a variável de ambiente NODE_ENV não está configurada como 'production'",
     )
-
-  return true
+  }
 }
 
 export default logger
