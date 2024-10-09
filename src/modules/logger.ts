@@ -21,10 +21,12 @@ export default function (): Logger {
 
   if (
     process.env.NODE_ENV == "production" &&
-    !process.env.GOOGLE_APPLICATION_CREDENTIALS
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS &&
+    !process.env.K_SERVICE &&
+    !process.env.CLOUD_RUN_JOB
   ) {
     const msg =
-      "A variável de ambiente 'NODE_ENV' é 'production', mas o script não está rodando dentro do GCP. Para simular o log no GCP em testes locais, defina a variável de ambiente 'GOOGLE_APPLICATION_CREDENTIALS' com o caminho do arquivo json que contém a conta de serviço que permite registrar logs no projeto."
+      "A variável de ambiente 'NODE_ENV' é 'production', mas o script não está rodando dentro do GCP. As variáveis de ambiente 'K_SERVICE' e 'CLOUD_RUN_JOB' estão indefinidas. Para simular o log no GCP em testes locais, defina a variável de ambiente 'GOOGLE_APPLICATION_CREDENTIALS' com o caminho do arquivo json que contém a conta de serviço que permite registrar logs no projeto."
     throw new Error(msg)
   }
   // Configuração do Google Cloud Logging

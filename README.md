@@ -41,6 +41,10 @@ Para testes locais e desenvolvimento, use o comando `npm run dev`.
   
 ## Changelog
 
+**v1.6.1 (09-10-2024)**
+
+- Corrigido erro de verificação de ambiente GCP no módulo logger
+
 **v1.6.0 (09-10-2024)**
 
 - Refatorado o módulo Logger para funcionar diretamente com o GCP
